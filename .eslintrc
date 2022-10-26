@@ -57,7 +57,7 @@
     }
   ],
   "rules": {
-    "no-console": "error",
+    "no-console": "warn",
     "react/display-name": "off",
     "import/order": [
       "error",
@@ -97,10 +97,7 @@
       "error",
       {
         "devDependencies": [
-          "**/*.test.js",
-          "**/*.stories.*",
-          "**/.storybook/**/*.*",
-          "**/storybook/**/*.*"
+          "**/*.test.js"
         ],
         "peerDependencies": true
       }
