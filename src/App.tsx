@@ -17,6 +17,8 @@ const App: React.FC = () => {
 
   const handleTakingCard = () => dispatch({ type: GameActionsEnum.GET_A_CARD });
 
+  const handlePass = () => dispatch({ type: GameActionsEnum.PASS });
+
   return (
     <div className="App">
       <h1>Black Jack</h1>
@@ -34,6 +36,9 @@ const App: React.FC = () => {
 
       <button disabled={isNotGameStatusPlay} onClick={handleTakingCard}>
         Take Card
+      </button>
+      <button disabled={isNotGameStatusPlay} onClick={handlePass}>
+        Pass
       </button>
 
       <div>
@@ -58,7 +63,7 @@ const App: React.FC = () => {
           <button onClick={handleNewGame}>New Game</button>
         </div>
       )}
-      {state.gameStatus === GameStatusEnum.EndWithPoints && (
+      {state.gameStatus === GameStatusEnum.Pass && (
         <div>
           <p>End with score: {state.gameScore}</p>
           <button onClick={handleNewGame}>New Game</button>

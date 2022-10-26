@@ -1,7 +1,7 @@
 export enum GameStatusEnum {
   PersianEye = 'PersianEye',
   Win = 'Win',
-  EndWithPoints = 'EndWithPoints',
+  Pass = 'Pass',
   Lose = 'Lose',
   Play = 'Play',
 }

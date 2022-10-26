@@ -8,6 +8,9 @@ import { gameInitState } from './gameInitState';
 
 export default function gameReducer(state: GameState, action: GameActions) {
   switch (action.type) {
+    case GameActionsEnum.NEW_GAME: {
+      return gameInitState;
+    }
     case GameActionsEnum.GET_A_CARD: {
       const { gameDeck, playerStack, gameScore } = state;
       const newCardIndex = playerStack.length;
@@ -44,8 +47,11 @@ export default function gameReducer(state: GameState, action: GameActions) {
         gameStatus: handleCurrentGameStatus(),
       };
     }
-    case GameActionsEnum.NEW_GAME: {
-      return gameInitState;
+    case GameActionsEnum.PASS: {
+      return {
+        ...state,
+        gameStatus: GameStatusEnum.Pass,
+      };
     }
     default:
       return state;
