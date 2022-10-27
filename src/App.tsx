@@ -11,13 +11,15 @@ import { GameStatusEnum } from './constants/gameStatus.enum';
 import { GameActions, GameState } from './models/game.model';
 import { gameInitState } from './reducers/gameReducer/gameInitState';
 import gameReducer from './reducers/gameReducer/gameReducer';
+import * as S from './styles/App.style';
+import { GlobalStyle } from './styles/GlobalStyle';
 
 const App: React.FC = () => {
   const [state, dispatch] = React.useReducer<
     React.Reducer<GameState, GameActions>
   >(gameReducer, gameInitState);
 
-  const gameStatus = state.gameStatus as GameStatusEnum;
+  const { gameStatus } = state;
   const isNotGameStatusPlay = state.gameStatus !== GameStatusEnum.Play;
 
   const handleNewGame = () => dispatch({ type: GameActionsEnum.NEW_GAME });
@@ -27,34 +29,41 @@ const App: React.FC = () => {
   const handlePass = () => dispatch({ type: GameActionsEnum.PASS });
 
   return (
-    <main className="App">
-      <Header title="Black Jack" />
+    <>
+      <S.Main>
+        <Header title="Black Jack" />
 
-      <CardList>
-        {state.playerStack.map(({ kind, color }) => (
-          <CardBox key={`${kind}-${color}`} color={color} kind={kind} />
-        ))}
-      </CardList>
+        <S.GameTabel>
+          <CardList>
+            {state.playerStack.map(({ kind, color }) => (
+              <CardBox key={`${kind}-${color}`} color={color} kind={kind} />
+            ))}
+          </CardList>
 
-      <Button
-        isDisabled={isNotGameStatusPlay}
-        label="Take Card"
-        onClick={handleTakingCard}
-      />
-      <Button
-        isDisabled={isNotGameStatusPlay}
-        label="Pass"
-        onClick={handlePass}
-      />
+          <S.GameButtons>
+            <Button
+              isDisabled={isNotGameStatusPlay}
+              label="Take Card"
+              onClick={handleTakingCard}
+            />
+            <Button
+              isDisabled={isNotGameStatusPlay}
+              label="Pass"
+              onClick={handlePass}
+            />
+          </S.GameButtons>
+        </S.GameTabel>
 
-      <Text>Score: {state.gameScore}</Text>
+        <Text>Score: {state.gameScore}</Text>
 
-      <Modal
-        gameScore={state.gameScore}
-        gameStatus={gameStatus}
-        handleNewGame={handleNewGame}
-      />
-    </main>
+        <Modal
+          gameScore={state.gameScore}
+          gameStatus={gameStatus}
+          handleNewGame={handleNewGame}
+        />
+      </S.Main>
+      <GlobalStyle />
+    </>
   );
 };
 
