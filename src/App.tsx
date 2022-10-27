@@ -1,5 +1,11 @@
 import React from 'react';
 
+import Button from './components/Button';
+import CardBox from './components/CardBox';
+import CardList from './components/CardList';
+import Header from './components/Header';
+import Modal from './components/Modal';
+import Text from './components/Text';
 import { GameActionsEnum } from './constants/gameActions.enum';
 import { GameStatusEnum } from './constants/gameStatus.enum';
 import { GameActions, GameState } from './models/game.model';
@@ -11,6 +17,7 @@ const App: React.FC = () => {
     React.Reducer<GameState, GameActions>
   >(gameReducer, gameInitState);
 
+  const gameStatus = state.gameStatus as GameStatusEnum;
   const isNotGameStatusPlay = state.gameStatus !== GameStatusEnum.Play;
 
   const handleNewGame = () => dispatch({ type: GameActionsEnum.NEW_GAME });
@@ -20,56 +27,34 @@ const App: React.FC = () => {
   const handlePass = () => dispatch({ type: GameActionsEnum.PASS });
 
   return (
-    <div className="App">
-      <h1>Black Jack</h1>
+    <main className="App">
+      <Header title="Black Jack" />
 
-      {/* Cards */}
-      <ul>
+      <CardList>
         {state.playerStack.map(({ kind, color }) => (
-          <li key={`${kind}-${color}`}>
-            <span>{kind}</span>
-            &nbsp;
-            <span>{color}</span>
-          </li>
+          <CardBox key={`${kind}-${color}`} color={color} kind={kind} />
         ))}
-      </ul>
+      </CardList>
 
-      <button disabled={isNotGameStatusPlay} onClick={handleTakingCard}>
-        Take Card
-      </button>
-      <button disabled={isNotGameStatusPlay} onClick={handlePass}>
-        Pass
-      </button>
+      <Button
+        isDisabled={isNotGameStatusPlay}
+        label="Take Card"
+        onClick={handleTakingCard}
+      />
+      <Button
+        isDisabled={isNotGameStatusPlay}
+        label="Pass"
+        onClick={handlePass}
+      />
 
-      <div>
-        <p>Score: {state.gameScore}</p>
-      </div>
+      <Text>Score: {state.gameScore}</Text>
 
-      {state.gameStatus === GameStatusEnum.Lose && (
-        <div>
-          <p>Game Over</p>
-          <button onClick={handleNewGame}>New Game</button>
-        </div>
-      )}
-      {state.gameStatus === GameStatusEnum.PersianEye && (
-        <div>
-          <p>!!! PERSIAN EYE !!!</p>
-          <button onClick={handleNewGame}>New Game</button>
-        </div>
-      )}
-      {state.gameStatus === GameStatusEnum.Win && (
-        <div>
-          <p>Win with score: {state.gameScore}</p>
-          <button onClick={handleNewGame}>New Game</button>
-        </div>
-      )}
-      {state.gameStatus === GameStatusEnum.Pass && (
-        <div>
-          <p>End with score: {state.gameScore}</p>
-          <button onClick={handleNewGame}>New Game</button>
-        </div>
-      )}
-    </div>
+      <Modal
+        gameScore={state.gameScore}
+        gameStatus={gameStatus}
+        handleNewGame={handleNewGame}
+      />
+    </main>
   );
 };
 
