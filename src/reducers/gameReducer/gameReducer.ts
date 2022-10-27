@@ -1,15 +1,26 @@
 import { CardFiguresEnum } from '../../constants/cardFigures.enum';
 import { GameActionsEnum } from '../../constants/gameActions.enum';
 import { GameStatusEnum } from '../../constants/gameStatus.enum';
+import { deck } from '../../data/deck';
 import { Card } from '../../models/card.model';
 import { GameActions, GameState } from '../../models/game.model';
-
-import { gameInitState } from './gameInitState';
 
 export default function gameReducer(state: GameState, action: GameActions) {
   switch (action.type) {
     case GameActionsEnum.NEW_GAME: {
-      return gameInitState;
+      const shuffledDeck = deck.sort(() => 0.5 - Math.random());
+      const firstCard = shuffledDeck[0];
+      const startDeck = shuffledDeck.filter(
+        ({ kind, color }: Card) =>
+          kind !== firstCard.kind || color !== firstCard.color
+      );
+
+      return {
+        gameDeck: startDeck,
+        playerStack: [shuffledDeck[0]],
+        gameScore: shuffledDeck[0].points,
+        gameStatus: GameStatusEnum.Play,
+      };
     }
     case GameActionsEnum.GET_A_CARD: {
       const { gameDeck, playerStack, gameScore } = state;
@@ -29,9 +40,7 @@ export default function gameReducer(state: GameState, action: GameActions) {
         checkIsPlayerCardAsByIndex(0) && checkIsPlayerCardAsByIndex(1);
 
       const handleCurrentGameStatus = () => {
-        if (isPersianEye) {
-          return GameStatusEnum.PersianEye;
-        }
+        if (isPersianEye) return GameStatusEnum.PersianEye;
 
         if (expectedScore === gamePointBorder) return GameStatusEnum.Win;
 
