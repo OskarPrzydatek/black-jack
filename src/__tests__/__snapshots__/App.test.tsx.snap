@@ -1,7 +1,99 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App component snapshot 1`] = `
-<div
-  className="App"
-/>
+<main
+  className="sc-iBYQkv hrJZox"
+>
+  <h1
+    className="sc-gKPRtg cRpntk"
+  >
+    Black Jack
+  </h1>
+  <div
+    className="sc-ftTHYK ytenO"
+  >
+    <ul
+      className="sc-jSUZER hYZLQi"
+      data-testid="player-cards-stack"
+    >
+      <li
+        className="sc-gswNZR jVnMTa"
+      >
+        <div
+          className="sc-dkrFOg zlcnh"
+        >
+          <span
+            data-testid="card-box-label"
+            style={
+              Object {
+                "color": "#D91828",
+              }
+            }
+          >
+            9
+          </span>
+        </div>
+        <div
+          className="sc-eDvSVe jikIfD"
+        >
+          <svg
+            fill="#D91828"
+            height="1em"
+            stroke="currentColor"
+            strokeWidth="0"
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+            viewBox="0 0 16 16"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"
+            />
+          </svg>
+        </div>
+        <div
+          className="sc-dkrFOg sc-hLBbgP zlcnh kxGVxz"
+        >
+          <span
+            style={
+              Object {
+                "color": "#D91828",
+              }
+            }
+          >
+            9
+          </span>
+        </div>
+      </li>
+    </ul>
+    <div
+      className="sc-pyfCe hXJFsd"
+    >
+      <button
+        className="sc-bcXHqe etdubz"
+        data-testid="take-card-button"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Take Card
+      </button>
+      <button
+        className="sc-bcXHqe etdubz"
+        data-testid="pass-button"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Pass
+      </button>
+    </div>
+  </div>
+  <p>
+    Score: 
+    0
+  </p>
+</main>
 `;

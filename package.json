@@ -40,6 +40,7 @@
     "collectCoverageFrom": [
       "<rootDir>/src/App.tsx",
       "<rootDir>/src/components/*.{tsx, ts}",
+      "<rootDir>/src/reducers/**/*.ts",
       "!<rootDir>/src/styles/*.{tsx, ts}",
       "!<rootDir>/src/index.tsx",
       "!<rootDir>/node_modules/"

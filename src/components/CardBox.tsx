@@ -25,7 +25,9 @@ export default function CardBox({ kind, color }: CardBoxProps) {
   return (
     <S.CardBox>
       <S.CardLabel>
-        <span style={cardColorStyle()}>{cardKindLabel()}</span>
+        <span data-testid="card-box-label" style={cardColorStyle()}>
+          {cardKindLabel()}
+        </span>
       </S.CardLabel>
       <S.CardColor>
         <Icon cardColor={color} />

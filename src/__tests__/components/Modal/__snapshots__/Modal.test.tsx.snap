@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal component snapshot 1`] = `
+<div>
+  <p>
+    Win with score: 21
+  </p>
+  <button
+    className="sc-bcXHqe etdubz"
+    onClick={[MockFunction]}
+  >
+    New Game
+  </button>
+</div>
+`;

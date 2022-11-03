@@ -6,12 +6,18 @@ import Text from './Text';
 interface ModalProps {
   gameStatus: GameStatusEnum;
   gameScore: number;
+  dataTestID?: string;
+  resultMessageTestID?: string;
+  newGameButtonTestID?: string;
   handleNewGame: () => void;
 }
 
 export default function Modal({
   gameStatus,
   gameScore,
+  dataTestID,
+  resultMessageTestID,
+  newGameButtonTestID,
   handleNewGame,
 }: ModalProps) {
   const gameResultMessage = {
@@ -24,9 +30,15 @@ export default function Modal({
 
   if (gameStatus !== GameStatusEnum.Play)
     return (
-      <div>
-        <Text>{gameResultMessage[gameStatus]}</Text>
-        <Button label="New Game" onClick={handleNewGame} />
+      <div data-testid={dataTestID}>
+        <Text dataTestID={resultMessageTestID}>
+          {gameResultMessage[gameStatus]}
+        </Text>
+        <Button
+          dataTestID={newGameButtonTestID}
+          label="New Game"
+          onClick={handleNewGame}
+        />
       </div>
     );
 

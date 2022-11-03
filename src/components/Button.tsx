@@ -1,13 +1,21 @@
+import * as S from '../styles/Buton.style';
+
 interface ButtonProps {
   label: string;
   isDisabled?: boolean;
+  dataTestID?: string;
   onClick: () => void;
 }
 
-export default function Button({ label, isDisabled, onClick }: ButtonProps) {
+export default function Button({
+  label,
+  isDisabled,
+  dataTestID,
+  onClick,
+}: ButtonProps) {
   return (
-    <button disabled={isDisabled} onClick={onClick}>
+    <S.Button data-testid={dataTestID} disabled={isDisabled} onClick={onClick}>
       {label}
-    </button>
+    </S.Button>
   );
 }

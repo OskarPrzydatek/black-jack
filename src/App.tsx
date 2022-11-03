@@ -19,7 +19,6 @@ const App: React.FC = () => {
     React.Reducer<GameState, GameActions>
   >(gameReducer, gameInitState);
 
-  const { gameStatus } = state;
   const isNotGameStatusPlay = state.gameStatus !== GameStatusEnum.Play;
 
   const handleNewGame = () => dispatch({ type: GameActionsEnum.NEW_GAME });
@@ -34,7 +33,7 @@ const App: React.FC = () => {
         <Header title="Black Jack" />
 
         <S.GameTabel>
-          <CardList>
+          <CardList dataTestID="player-cards-stack">
             {state.playerStack.map(({ kind, color }) => (
               <CardBox key={`${kind}-${color}`} color={color} kind={kind} />
             ))}
@@ -42,11 +41,13 @@ const App: React.FC = () => {
 
           <S.GameButtons>
             <Button
+              dataTestID="take-card-button"
               isDisabled={isNotGameStatusPlay}
               label="Take Card"
               onClick={handleTakingCard}
             />
             <Button
+              dataTestID="pass-button"
               isDisabled={isNotGameStatusPlay}
               label="Pass"
               onClick={handlePass}
@@ -57,9 +58,12 @@ const App: React.FC = () => {
         <Text>Score: {state.gameScore}</Text>
 
         <Modal
+          dataTestID="game-result-modal"
           gameScore={state.gameScore}
-          gameStatus={gameStatus}
+          gameStatus={state.gameStatus}
           handleNewGame={handleNewGame}
+          newGameButtonTestID="new-game-button"
+          resultMessageTestID="game-result-message"
         />
       </S.Main>
       <GlobalStyle />

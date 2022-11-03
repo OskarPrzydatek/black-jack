@@ -23,29 +23,26 @@ export default function gameReducer(state: GameState, action: GameActions) {
       };
     }
     case GameActionsEnum.GET_A_CARD: {
-      const { gameDeck, playerStack, gameScore } = state;
-      const newCardIndex = playerStack.length;
-      const newCard = gameDeck[newCardIndex];
-      const expectedScore = gameScore + newCard.points;
       const gamePointBorder = 21;
+      const { gameDeck, playerStack, gameScore } = state;
+      const newCard = gameDeck[0];
+      const updatedPalyerStack = [...playerStack, newCard];
+      const expectedScore = gameScore + newCard.points;
       const updateDeckAfterCardTake = gameDeck.filter(
         ({ kind, color }: Card) =>
           kind !== newCard.kind || color !== newCard.color
       );
 
       const checkIsPlayerCardAsByIndex = (index: number) =>
-        playerStack[index].kind === CardFiguresEnum.As;
+        updatedPalyerStack[index].kind === CardFiguresEnum.As;
 
       const isPersianEye =
         checkIsPlayerCardAsByIndex(0) && checkIsPlayerCardAsByIndex(1);
 
       const handleCurrentGameStatus = () => {
         if (isPersianEye) return GameStatusEnum.PersianEye;
-
         if (expectedScore === gamePointBorder) return GameStatusEnum.Win;
-
         if (expectedScore > gamePointBorder) return GameStatusEnum.Lose;
-
         return GameStatusEnum.Play;
       };
 
@@ -63,6 +60,6 @@ export default function gameReducer(state: GameState, action: GameActions) {
       };
     }
     default:
-      return state;
+      throw new Error('Invalid game reducer action');
   }
 }
