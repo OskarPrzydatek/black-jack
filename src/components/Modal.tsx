@@ -1,4 +1,5 @@
 import { GameStatusEnum } from '../constants/gameStatus.enum';
+import * as S from '../styles/ Modal.style';
 
 import Button from './Button';
 import Text from './Text';
@@ -30,16 +31,18 @@ export default function Modal({
 
   if (gameStatus !== GameStatusEnum.Play)
     return (
-      <div data-testid={dataTestID}>
-        <Text dataTestID={resultMessageTestID}>
-          {gameResultMessage[gameStatus]}
-        </Text>
-        <Button
-          dataTestID={newGameButtonTestID}
-          label="New Game"
-          onClick={handleNewGame}
-        />
-      </div>
+      <S.ModalWrapper data-testid={dataTestID}>
+        <S.Modal>
+          <Text dataTestID={resultMessageTestID}>
+            {gameResultMessage[gameStatus]}
+          </Text>
+          <Button
+            dataTestID={newGameButtonTestID}
+            label="New Game"
+            onClick={handleNewGame}
+          />
+        </S.Modal>
+      </S.ModalWrapper>
     );
 
   return null;

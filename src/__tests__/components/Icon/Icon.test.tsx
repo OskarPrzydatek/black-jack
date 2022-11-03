@@ -1,4 +1,5 @@
 import renderer from 'react-test-renderer';
+
 import Icon from '../../../components/Icon';
 import { CardColorsEnum } from '../../../constants/cardColors.enum';
 

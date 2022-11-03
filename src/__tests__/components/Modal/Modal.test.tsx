@@ -1,4 +1,5 @@
 import renderer from 'react-test-renderer';
+
 import Modal from '../../../components/Modal';
 import { GameStatusEnum } from '../../../constants/gameStatus.enum';
 
@@ -9,8 +10,8 @@ describe('Modal', () => {
     const tree = renderer
       .create(
         <Modal
-          gameStatus={GameStatusEnum.Win}
           gameScore={21}
+          gameStatus={GameStatusEnum.Win}
           handleNewGame={mockHandleNewGame}
         />
       )

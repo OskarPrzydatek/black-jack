@@ -1,6 +1,6 @@
 import renderer from 'react-test-renderer';
-import CardBox from '../../../components/CardBox';
 
+import CardBox from '../../../components/CardBox';
 import CardList from '../../../components/CardList';
 import { CardColorsEnum } from '../../../constants/cardColors.enum';
 
@@ -9,7 +9,7 @@ describe('CardList', () => {
     const tree = renderer
       .create(
         <CardList>
-          <CardBox kind={9} color={CardColorsEnum.Clovers} />
+          <CardBox color={CardColorsEnum.Clovers} kind={9} />
         </CardList>
       )
       .toJSON();
